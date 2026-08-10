@@ -6,8 +6,8 @@ import { STATUS_LABELS } from '../lib/format';
 import { StepList } from './StepList';
 
 const FIELD =
-  'w-full rounded-md border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500';
-const LABEL = 'mb-1 block text-sm font-medium text-slate-200';
+  'w-full rounded-md border border-line bg-surface-2 px-3 py-2 text-sm text-ink placeholder:text-ink-dim';
+const LABEL = 'mb-1 block text-sm font-medium text-ink';
 
 interface GoalFormProps {
   initialDraft: GoalDraft;
@@ -97,7 +97,7 @@ export function GoalForm({
 
       <div>
         <label htmlFor={field('deadline')} className={LABEL}>
-          Échéance <span className="font-normal text-slate-400">(optionnelle)</span>
+          Échéance <span className="font-normal text-ink-dim">(optionnelle)</span>
         </label>
         <input
           id={field('deadline')}
@@ -152,18 +152,18 @@ export function GoalForm({
         <StepList steps={draft.steps} onChange={(steps: Step[]) => patch('steps', steps)} />
       </fieldset>
 
-      <div className="flex flex-wrap items-center gap-3 border-t border-slate-800 pt-4">
+      <div className="flex flex-wrap items-center gap-3 border-t border-line pt-4">
         <button
           type="submit"
           disabled={draft.title.trim() === ''}
-          className="rounded-md bg-sky-500 px-4 py-2 text-sm font-medium text-slate-950 hover:bg-sky-400 disabled:opacity-40"
+          className="rounded-md bg-accent-strong px-4 py-2 text-sm font-medium text-white hover:bg-accent disabled:opacity-40"
         >
           {submitLabel}
         </button>
         <button
           type="button"
           onClick={onCancel}
-          className="rounded-md border border-slate-700 px-4 py-2 text-sm text-slate-200 hover:bg-slate-800"
+          className="rounded-md border border-line px-4 py-2 text-sm text-ink hover:bg-surface-2"
         >
           Annuler
         </button>
@@ -172,18 +172,18 @@ export function GoalForm({
           <div className="ms-auto flex items-center gap-2">
             {confirmingDelete ? (
               <>
-                <span className="text-sm text-slate-300">Supprimer définitivement ?</span>
+                <span className="text-sm text-ink-dim">Supprimer définitivement ?</span>
                 <button
                   type="button"
                   onClick={onDelete}
-                  className="rounded-md bg-rose-600 px-3 py-2 text-sm font-medium text-white hover:bg-rose-500"
+                  className="rounded-md bg-danger-ink px-3 py-2 text-sm font-medium text-white hover:bg-danger"
                 >
                   Oui, supprimer
                 </button>
                 <button
                   type="button"
                   onClick={() => setConfirmingDelete(false)}
-                  className="rounded-md border border-slate-700 px-3 py-2 text-sm text-slate-200 hover:bg-slate-800"
+                  className="rounded-md border border-line px-3 py-2 text-sm text-ink hover:bg-surface-2"
                 >
                   Non
                 </button>
@@ -192,7 +192,7 @@ export function GoalForm({
               <button
                 type="button"
                 onClick={() => setConfirmingDelete(true)}
-                className="rounded-md border border-rose-900 px-3 py-2 text-sm text-rose-300 hover:bg-rose-950"
+                className="rounded-md border border-danger px-3 py-2 text-sm text-danger-ink hover:bg-danger-soft"
               >
                 Supprimer l’objectif
               </button>

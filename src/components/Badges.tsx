@@ -6,9 +6,9 @@ import { STATUS_LABELS, formatDate, formatDaysLeft } from '../lib/format';
 const BASE = 'inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium';
 
 const STATUS_STYLES: Record<GoalStatus, string> = {
-  not_started: 'bg-slate-800 text-slate-300',
-  in_progress: 'bg-sky-950 text-sky-300',
-  achieved: 'bg-emerald-950 text-emerald-300',
+  not_started: 'bg-surface-2 text-ink',
+  in_progress: 'bg-info-soft text-info-ink',
+  achieved: 'bg-mint-soft text-mint-ink',
 };
 
 export function StatusBadge({ status }: { status: GoalStatus }) {
@@ -16,7 +16,7 @@ export function StatusBadge({ status }: { status: GoalStatus }) {
 }
 
 export function AreaBadge({ area }: { area: LifeAreaId }) {
-  return <span className={`${BASE} bg-slate-800 text-slate-200`}>{formatArea(area)}</span>;
+  return <span className={`${BASE} bg-surface-2 text-ink`}>{formatArea(area)}</span>;
 }
 
 interface DeadlineBadgeProps {
@@ -31,17 +31,17 @@ export function DeadlineBadge({ goal, today = new Date() }: DeadlineBadgeProps) 
   if (!goal.deadline || label === null) return null;
 
   const late = isOverdue(goal, today);
-  const style = late ? 'bg-rose-950 text-rose-300' : 'bg-slate-800 text-slate-300';
+  const style = late ? 'bg-danger-soft text-danger-ink' : 'bg-surface-2 text-ink';
 
   return (
     <span className={`${BASE} ${style}`}>
       {late && (
-        <span aria-hidden="true" className="text-rose-400">
+        <span aria-hidden="true" className="text-danger-ink">
           ⚠
         </span>
       )}
       <time dateTime={goal.deadline}>{formatDate(goal.deadline)}</time>
-      <span className="text-slate-500" aria-hidden="true">
+      <span className="text-accent-soft" aria-hidden="true">
         ·
       </span>
       {label}

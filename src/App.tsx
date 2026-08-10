@@ -67,11 +67,11 @@ export default function App() {
           />
         ) : (
           <div>
-            <p className="text-sm text-slate-400">Cet objectif n’existe plus.</p>
+            <p className="text-sm text-ink-dim">Cet objectif n’existe plus.</p>
             <button
               type="button"
               onClick={() => setView({ kind: 'goals' })}
-              className="mt-3 rounded-md border border-slate-700 px-4 py-2 text-sm text-slate-200 hover:bg-slate-800"
+              className="mt-3 rounded-md border border-line px-4 py-2 text-sm text-ink hover:bg-surface-2"
             >
               Retour aux objectifs
             </button>

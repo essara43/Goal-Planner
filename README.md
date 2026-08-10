@@ -14,7 +14,7 @@ de là.
 |---|---|
 | Build | Vite 8 |
 | UI | React 19 + TypeScript (mode `strict`) |
-| Styles | Tailwind CSS 4, thème sombre unique |
+| Styles | Tailwind CSS 4, palette reprise du Budget Planner |
 | Persistance | `localStorage` + import/export JSON |
 | Tests | Vitest 4 + React Testing Library |
 | Desktop | PWA installable (`vite-plugin-pwa`) |
@@ -179,9 +179,24 @@ seulement journalisé en console — l'app continue en mémoire pour la session,
 **Tailwind 4 en configuration CSS-first** : ni `tailwind.config.js` ni `postcss.config.js`,
 tout passe par `@tailwindcss/vite` et `src/index.css`.
 
-**Thème sombre unique**, sans variante claire ni bascule : les couleurs sont posées en dur
-plutôt que derrière `dark:`. *Limite* : ajouter un thème clair demanderait de reprendre la
-palette.
+**Palette reprise de l'app Budget Planner** ([essara43/budget](https://github.com/essara43/budget)),
+définie une fois comme tokens Tailwind dans `src/index.css` : `page`, `surface`, `line`, `ink`,
+`accent`… Les composants n'écrivent jamais une couleur en dur, ce qui rend un futur changement de
+palette local à ce fichier. Thème unique, sans variante ni bascule.
+
+Deux écarts assumés par rapport aux tokens d'origine, pour la lisibilité :
+
+| Rôle | Budget Planner | Ici | Pourquoi |
+|---|---|---|---|
+| Texte secondaire | `#c087a4` | `#9c5c7c` | 2,6:1 sur le fond rose, sous le seuil AA (4,5:1) ; le nouveau ton donne 4,5:1 |
+| Fond des boutons pleins | `#ff85b3` | `#c92f70` | du blanc sur `#ff85b3` ne donne que 2,3:1 ; sur `#c92f70`, 5,1:1 |
+
+Le rose `#ff85b3` d'origine reste utilisé partout où il ne sert pas de fond à du texte : barres
+de progression, bordures au survol, titre de l'en-tête. *Limite* : les boutons pleins sont donc
+un cran plus soutenus que dans le Budget Planner.
+
+Non repris, faute d'être demandé : le rayon de 18 px, les bordures de 2 px et la pile de polices
+(qui place `Comic Sans MS` avant `Quicksand`).
 
 **Libellés bilingues assumés.** Les cinq questions de la fiche objectif gardent la formulation
 anglaise du template Excel d'origine (*What do you want to achieve?*, *Steps to reach goal*, …),

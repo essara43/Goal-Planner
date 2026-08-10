@@ -1,11 +1,44 @@
 @import 'tailwindcss';
 
-/* Thème sombre unique : les couleurs de base sont posées ici plutôt que
-   derrière la variante `dark:`, l'app n'ayant pas de thème clair. */
+/**
+ * Palette reprise de l'app Budget Planner (essara43/budget), dont les tokens
+ * d'origine sont :
+ *   --bg #fff0f6  --bg-elev #ffffff  --bg-elev-2 #fff2f8  --border #ffd3e6
+ *   --text #6d4257  --text-dim #c087a4  --accent #ff85b3  --accent-dim #ffc2da
+ *   --red #ff6f91  --yellow #ffcf5c  --blue #8ecae6
+ *
+ * Deux écarts assumés, pour la lisibilité du texte :
+ *   - `ink-dim` vaut #9c5c7c au lieu de #c087a4 (2,6:1 sur le fond, illisible) ;
+ *   - les aplats pleins utilisent `accent-strong`, le rose #ff85b3 ne portant
+ *     que 2,3:1 avec du blanc dessus.
+ * Le rose d'origine reste utilisé partout où il ne sert pas de fond à du texte.
+ */
 @theme {
-  --color-surface: var(--color-slate-900);
-  --color-surface-raised: var(--color-slate-800);
-  --color-line: var(--color-slate-700);
+  --color-page: #fff0f6;
+  --color-surface: #ffffff;
+  --color-surface-2: #fff2f8;
+  --color-line: #ffd3e6;
+
+  --color-ink: #6d4257;
+  --color-ink-dim: #9c5c7c;
+
+  --color-accent: #ff85b3;
+  --color-accent-soft: #ffc2da;
+  --color-accent-strong: #c92f70;
+
+  --color-danger: #ff6f91;
+  --color-danger-soft: #ffe3ea;
+  --color-danger-ink: #b3143c;
+
+  --color-mint: #a0e7c8;
+  --color-mint-soft: #d9f5e8;
+  --color-mint-ink: #17694a;
+
+  --color-info: #8ecae6;
+  --color-info-soft: #ddf0f9;
+  --color-info-ink: #14607f;
+
+  --shadow-soft: 0 6px 18px rgba(255, 133, 179, 0.18);
 }
 
 html,
@@ -15,14 +48,20 @@ body,
 }
 
 body {
-  background-color: var(--color-slate-950);
-  color: var(--color-slate-100);
+  /* Les deux halos diagonaux du Budget Planner : rose en haut à droite,
+     parme en bas à gauche. */
+  background:
+    radial-gradient(1200px 600px at 100% -10%, #ffe0ef 0%, rgba(255, 224, 239, 0) 60%),
+    radial-gradient(900px 500px at -10% 110%, #e9dcff 0%, rgba(233, 220, 255, 0) 55%),
+    var(--color-page);
+  background-attachment: fixed;
+  color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
 }
 
 /* Anneau de focus visible et contrasté sur tous les éléments interactifs,
    pour la navigation clavier. */
 :focus-visible {
-  outline: 2px solid var(--color-sky-400);
+  outline: 2px solid var(--color-accent-strong);
   outline-offset: 2px;
 }

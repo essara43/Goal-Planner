@@ -15,9 +15,9 @@ type Feedback =
   | { kind: 'error'; message: string; details: string[] }
   | null;
 
-const CARD = 'rounded-xl border border-slate-800 bg-slate-900 p-5';
+const CARD = 'rounded-xl border border-line bg-surface p-5 shadow-soft';
 const BUTTON =
-  'rounded-md border border-slate-700 px-4 py-2 text-sm text-slate-200 hover:bg-slate-800';
+  'rounded-md border border-line px-4 py-2 text-sm text-ink hover:bg-surface-2';
 
 export function SettingsPage({ goals, onImport, onReset }: SettingsPageProps) {
   const [feedback, setFeedback] = useState<Feedback>(null);
@@ -81,13 +81,13 @@ export function SettingsPage({ goals, onImport, onReset }: SettingsPageProps) {
           role={feedback.kind === 'error' ? 'alert' : 'status'}
           className={`rounded-lg border p-4 text-sm ${
             feedback.kind === 'error'
-              ? 'border-rose-900 bg-rose-950/50 text-rose-200'
-              : 'border-emerald-900 bg-emerald-950/50 text-emerald-200'
+              ? 'border-danger bg-danger-soft text-danger-ink'
+              : 'border-mint bg-mint-soft text-mint-ink'
           }`}
         >
           <p className="font-medium">{feedback.message}</p>
           {feedback.kind === 'error' && (
-            <ul className="mt-2 list-disc space-y-1 ps-5 text-rose-300">
+            <ul className="mt-2 list-disc space-y-1 ps-5 text-danger-ink">
               {feedback.details.slice(0, 10).map((detail) => (
                 <li key={detail}>{detail}</li>
               ))}
@@ -103,7 +103,7 @@ export function SettingsPage({ goals, onImport, onReset }: SettingsPageProps) {
         <h2 id="export" className="font-semibold">
           Exporter
         </h2>
-        <p className="mt-1 text-sm text-slate-400">
+        <p className="mt-1 text-sm text-ink-dim">
           Télécharge un fichier JSON contenant tes {goals.length} objectif
           {goals.length > 1 ? 's' : ''}. C’est ta seule sauvegarde : les données ne quittent
           jamais cet appareil.
@@ -117,13 +117,13 @@ export function SettingsPage({ goals, onImport, onReset }: SettingsPageProps) {
         <h2 id="import" className="font-semibold">
           Importer
         </h2>
-        <p className="mt-1 text-sm text-slate-400">
+        <p className="mt-1 text-sm text-ink-dim">
           Le fichier est validé avant d’être appliqué : la moindre anomalie annule l’import
           entier. En cas de succès, les objectifs importés{' '}
-          <strong className="font-medium text-slate-300">remplacent</strong> les objectifs
+          <strong className="font-medium text-ink">remplacent</strong> les objectifs
           actuels.
         </p>
-        <label htmlFor={importId} className="mt-4 block text-sm font-medium text-slate-200">
+        <label htmlFor={importId} className="mt-4 block text-sm font-medium text-ink">
           Fichier JSON à importer
         </label>
         <input
@@ -132,7 +132,7 @@ export function SettingsPage({ goals, onImport, onReset }: SettingsPageProps) {
           type="file"
           accept="application/json,.json"
           onChange={handleImport}
-          className="mt-1 block w-full text-sm text-slate-300 file:me-3 file:rounded-md file:border file:border-slate-700 file:bg-slate-800 file:px-3 file:py-2 file:text-sm file:text-slate-200 hover:file:bg-slate-700"
+          className="mt-1 block w-full text-sm text-ink-dim file:me-3 file:rounded-md file:border file:border-line file:bg-surface-2 file:px-3 file:py-2 file:text-sm file:text-ink hover:file:bg-line"
         />
       </section>
 
@@ -140,21 +140,21 @@ export function SettingsPage({ goals, onImport, onReset }: SettingsPageProps) {
         <h2 id="reset" className="font-semibold">
           Réinitialiser
         </h2>
-        <p className="mt-1 text-sm text-slate-400">
+        <p className="mt-1 text-sm text-ink-dim">
           Supprime définitivement tous les objectifs et vide la clé{' '}
-          <code className="rounded bg-slate-800 px-1 py-0.5 text-xs">{STORAGE_KEY}</code>. Pense
+          <code className="rounded bg-surface-2 px-1 py-0.5 text-xs">{STORAGE_KEY}</code>. Pense
           à exporter avant.
         </p>
         {confirmingReset ? (
           <div className="mt-4 flex flex-wrap items-center gap-3">
-            <span className="text-sm text-slate-200">
+            <span className="text-sm text-ink">
               Supprimer les {goals.length} objectif{goals.length > 1 ? 's' : ''} ? Action
               irréversible.
             </span>
             <button
               type="button"
               onClick={handleReset}
-              className="rounded-md bg-rose-600 px-3 py-2 text-sm font-medium text-white hover:bg-rose-500"
+              className="rounded-md bg-danger-ink px-3 py-2 text-sm font-medium text-white hover:bg-danger"
             >
               Oui, tout supprimer
             </button>
@@ -170,7 +170,7 @@ export function SettingsPage({ goals, onImport, onReset }: SettingsPageProps) {
           <button
             type="button"
             onClick={() => setConfirmingReset(true)}
-            className="mt-4 rounded-md border border-rose-900 px-4 py-2 text-sm text-rose-300 hover:bg-rose-950"
+            className="mt-4 rounded-md border border-danger px-4 py-2 text-sm text-danger-ink hover:bg-danger-soft"
           >
             Réinitialiser les données
           </button>

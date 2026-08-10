@@ -18,14 +18,16 @@ export function Layout({ active, onNavigate, children }: LayoutProps) {
     <div className="min-h-full">
       <a
         href="#contenu"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-10 focus:rounded-md focus:bg-sky-500 focus:px-3 focus:py-2 focus:text-sm focus:text-slate-950"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-10 focus:rounded-md focus:bg-accent-strong focus:px-3 focus:py-2 focus:text-sm focus:text-white"
       >
         Aller au contenu
       </a>
 
-      <header className="border-b border-slate-800 bg-slate-900">
+      <header className="border-b border-line bg-surface/70">
         <div className="mx-auto flex max-w-5xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3">
-          <span className="text-lg font-semibold tracking-tight">🎯 Goal Planner</span>
+          <span className="text-lg font-extrabold tracking-tight text-accent-strong">
+            🎯 Goal Planner
+          </span>
           <nav aria-label="Navigation principale">
             <ul className="flex gap-1">
               {NAV_ITEMS.map((item) => {
@@ -36,10 +38,10 @@ export function Layout({ active, onNavigate, children }: LayoutProps) {
                       type="button"
                       onClick={() => onNavigate(item.id)}
                       aria-current={current ? 'page' : undefined}
-                      className={`rounded-md px-3 py-1.5 text-sm ${
+                      className={`rounded-full px-3 py-1.5 text-sm ${
                         current
-                          ? 'bg-slate-800 font-medium text-slate-100'
-                          : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                          ? 'bg-accent-soft font-semibold text-ink'
+                          : 'text-ink-dim hover:bg-surface-2 hover:text-ink'
                       }`}
                     >
                       {item.label}

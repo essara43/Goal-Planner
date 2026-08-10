@@ -30,7 +30,7 @@ export function GoalDetailPage({
         <button
           type="button"
           onClick={onCancel}
-          className="text-sm text-slate-400 hover:text-slate-200"
+          className="text-sm text-ink-dim hover:text-ink"
         >
           ← Retour aux objectifs
         </button>
@@ -40,14 +40,14 @@ export function GoalDetailPage({
       </div>
 
       {goal && (
-        <div className="rounded-xl border border-slate-800 bg-slate-900 p-4">
+        <div className="rounded-xl border border-line bg-surface p-4 shadow-soft">
           <div className="flex flex-wrap items-center gap-2">
             <StatusBadge status={goal.status} />
             <DeadlineBadge goal={goal} {...(today ? { today } : {})} />
           </div>
           <div className="mt-3 flex items-center gap-3">
             <ProgressBar value={progressPercent(goal) / 100} label="Avancement de l’objectif" />
-            <span className="shrink-0 text-xs text-slate-400 tabular-nums">
+            <span className="shrink-0 text-xs text-ink-dim tabular-nums">
               {progressPercent(goal)} %
             </span>
           </div>

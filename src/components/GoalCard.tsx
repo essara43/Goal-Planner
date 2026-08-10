@@ -13,12 +13,12 @@ export function GoalCard({ goal, onOpen, today }: GoalCardProps) {
   const done = goal.steps.filter((step) => step.done).length;
 
   return (
-    <article className="rounded-xl border border-slate-800 bg-slate-900 p-4 transition-colors hover:border-slate-700">
+    <article className="rounded-xl border border-line bg-surface p-4 shadow-soft transition-colors hover:border-accent">
       <h3 className="text-base font-semibold">
         <button
           type="button"
           onClick={() => onOpen(goal.id)}
-          className="rounded text-left text-slate-100 hover:text-sky-300"
+          className="rounded text-left text-ink hover:text-accent-strong"
         >
           {goal.title}
         </button>
@@ -32,12 +32,12 @@ export function GoalCard({ goal, onOpen, today }: GoalCardProps) {
 
       <div className="mt-3 flex items-center gap-3">
         <ProgressBar value={progress(goal)} label={`Avancement de « ${goal.title} »`} />
-        <span className="shrink-0 text-xs text-slate-400 tabular-nums">
+        <span className="shrink-0 text-xs text-ink-dim tabular-nums">
           {progressPercent(goal)} %
         </span>
       </div>
 
-      <p className="mt-1 text-xs text-slate-400">
+      <p className="mt-1 text-xs text-ink-dim">
         {goal.steps.length === 0
           ? 'Aucune étape'
           : `${done} / ${goal.steps.length} étape${goal.steps.length > 1 ? 's' : ''}`}

@@ -7,8 +7,8 @@ import { STATUS_LABELS } from '../lib/format';
 import { GoalCard } from '../components/GoalCard';
 
 const FIELD =
-  'rounded-md border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500';
-const LABEL = 'mb-1 block text-xs font-medium text-slate-300';
+  'rounded-md border border-line bg-surface-2 px-3 py-2 text-sm text-ink placeholder:text-ink-dim';
+const LABEL = 'mb-1 block text-xs font-medium text-ink-dim';
 
 interface GoalsListPageProps {
   goals: Goal[];
@@ -40,7 +40,7 @@ export function GoalsListPage({
         <button
           type="button"
           onClick={onCreateGoal}
-          className="rounded-md bg-sky-500 px-4 py-2 text-sm font-medium text-slate-950 hover:bg-sky-400"
+          className="rounded-md bg-accent-strong px-4 py-2 text-sm font-medium text-white hover:bg-accent"
         >
           Nouvel objectif
         </button>
@@ -127,13 +127,13 @@ export function GoalsListPage({
         </div>
       </section>
 
-      <p role="status" className="text-sm text-slate-400">
+      <p role="status" className="text-sm text-ink-dim">
         {visible.length} objectif{visible.length > 1 ? 's' : ''} affiché
         {visible.length > 1 ? 's' : ''} sur {goals.length}
       </p>
 
       {visible.length === 0 ? (
-        <p className="rounded-xl border border-dashed border-slate-800 p-8 text-center text-sm text-slate-400">
+        <p className="rounded-xl border border-dashed border-line p-8 text-center text-sm text-ink-dim">
           {goals.length === 0
             ? 'Aucun objectif pour l’instant. Commence par en créer un.'
             : 'Aucun objectif ne correspond à ces filtres.'}

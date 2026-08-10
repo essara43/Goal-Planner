@@ -12,14 +12,14 @@ import { fileURLToPath } from 'node:url';
 
 const OUT_DIR = join(dirname(fileURLToPath(import.meta.url)), '..', 'public', 'icons');
 
-const BACKGROUND = [2, 6, 23]; // slate-950
+const BACKGROUND = [255, 133, 179]; // accent #ff85b3
 /** Anneaux de la cible, du plus grand au plus petit : [rayon relatif, couleur]. */
 const RINGS = [
-  [0.42, [56, 189, 248]], // sky-400
-  [0.32, [15, 23, 42]], // slate-900
-  [0.22, [56, 189, 248]],
-  [0.12, [15, 23, 42]],
-  [0.06, [244, 63, 94]], // rose-500
+  [0.42, [255, 211, 230]], // line #ffd3e6
+  [0.32, [255, 255, 255]],
+  [0.22, [255, 211, 230]],
+  [0.12, [255, 255, 255]],
+  [0.055, [201, 47, 112]], // accent-strong #c92f70
 ];
 
 const SUPERSAMPLE = 3;

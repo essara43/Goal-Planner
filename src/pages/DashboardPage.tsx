@@ -27,12 +27,12 @@ export function DashboardPage({ goals, onOpenGoal, today = new Date() }: Dashboa
         <h1 id="progression-globale" className="text-xl font-semibold">
           Progression globale
         </h1>
-        <div className="mt-4 rounded-xl border border-slate-800 bg-slate-900 p-5">
+        <div className="mt-4 rounded-xl border border-line bg-surface p-5 shadow-soft">
           <p className="text-3xl font-semibold tabular-nums">
             {overall.achieved}{' '}
-            <span className="text-slate-500">/ {overall.total}</span>
+            <span className="text-ink-dim">/ {overall.total}</span>
           </p>
-          <p className="mt-1 text-sm text-slate-400">{summary}</p>
+          <p className="mt-1 text-sm text-ink-dim">{summary}</p>
           <div className="mt-4">
             <ProgressBar value={overall.ratio} label="Progression globale" />
           </div>
@@ -44,14 +44,14 @@ export function DashboardPage({ goals, onOpenGoal, today = new Date() }: Dashboa
           Par domaine de vie
         </h2>
         {byArea.length === 0 ? (
-          <p className="mt-4 text-sm text-slate-400">Aucun objectif enregistré pour l’instant.</p>
+          <p className="mt-4 text-sm text-ink-dim">Aucun objectif enregistré pour l’instant.</p>
         ) : (
-          <div className="mt-4 overflow-x-auto rounded-xl border border-slate-800">
+          <div className="mt-4 overflow-x-auto rounded-xl border border-line shadow-soft">
             <table className="w-full min-w-md text-sm">
               <caption className="sr-only">
                 Répartition des objectifs par domaine de vie
               </caption>
-              <thead className="bg-slate-900 text-left text-slate-300">
+              <thead className="bg-surface-2 text-left text-ink-dim">
                 <tr>
                   <th scope="col" className="px-4 py-2 font-medium">
                     Domaine
@@ -67,12 +67,12 @@ export function DashboardPage({ goals, onOpenGoal, today = new Date() }: Dashboa
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800 bg-slate-900/40">
+              <tbody className="divide-y divide-line bg-surface">
                 {byArea.map((row) => {
                   const area = getArea(row.areaId);
                   return (
                     <tr key={row.areaId}>
-                      <th scope="row" className="px-4 py-2 text-left font-normal text-slate-100">
+                      <th scope="row" className="px-4 py-2 text-left font-normal text-ink">
                         <span aria-hidden="true">{area.emoji}</span> {area.label}
                       </th>
                       <td className="px-4 py-2 text-right tabular-nums">{row.count}</td>
@@ -94,7 +94,7 @@ export function DashboardPage({ goals, onOpenGoal, today = new Date() }: Dashboa
           Échéances à moins de {UPCOMING_WINDOW_DAYS} jours
         </h2>
         {upcoming.length === 0 ? (
-          <p className="mt-4 text-sm text-slate-400">
+          <p className="mt-4 text-sm text-ink-dim">
             Aucune échéance proche. Les objectifs atteints ne sont pas listés ici.
           </p>
         ) : (
