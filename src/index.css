@@ -1,0 +1,28 @@
+@import 'tailwindcss';
+
+/* Thème sombre unique : les couleurs de base sont posées ici plutôt que
+   derrière la variante `dark:`, l'app n'ayant pas de thème clair. */
+@theme {
+  --color-surface: var(--color-slate-900);
+  --color-surface-raised: var(--color-slate-800);
+  --color-line: var(--color-slate-700);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background-color: var(--color-slate-950);
+  color: var(--color-slate-100);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Anneau de focus visible et contrasté sur tous les éléments interactifs,
+   pour la navigation clavier. */
+:focus-visible {
+  outline: 2px solid var(--color-sky-400);
+  outline-offset: 2px;
+}
