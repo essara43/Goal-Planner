@@ -37,34 +37,54 @@ npm run dev        # http://localhost:5173
 | `npm run preview` | sert le build de production sur http://localhost:4173 |
 | `npm run test` | suite de tests, une passe |
 | `npm run test:watch` | tests en mode surveillance |
+| `VITE_BASE=/Goal-Planner/ npm run build` | build tel que produit par la CI pour GitHub Pages |
 | `node scripts/generate-icons.mjs` | régénère les icônes PNG de la PWA |
+
+## Déploiement GitHub Pages
+
+Le workflow `.github/workflows/deploy.yml` construit et publie le site à chaque push sur
+`main`. Il lance les tests avant le build : une suite rouge bloque le déploiement.
+
+La **source Pages doit être réglée sur « GitHub Actions »** (Settings → Pages → Source).
+Le réglage « Deploy from a branch » servirait la racine du dépôt — c'est-à-dire les sources
+et non le build — et afficherait une page blanche.
+
+Le site est servi depuis un sous-dossier portant le nom du dépôt, d'où la variable
+`VITE_BASE=/Goal-Planner/` passée au build en CI. En local, `base` reste `/` et rien ne change.
 
 ## Installer l'app sur le Dock (macOS)
 
-```bash
-npm run build
-npm run preview
-```
-
-Puis, depuis <http://localhost:4173> :
+Le plus simple : ouvrir <https://essara43.github.io/Goal-Planner/> puis
 
 - **Chrome / Edge** (recommandé) : icône d'installation dans la barre d'adresse, ou
   menu ⋮ → *Caster, enregistrer et partager* → *Installer la page en tant qu'application*.
 - **Safari 17+** : *Fichier* → *Ajouter au Dock*.
 
+Sans passer par GitHub Pages, un serveur local fait aussi l'affaire — une PWA a besoin d'un
+contexte sécurisé, et `localhost` en est un :
+
+```bash
+npm run build && npm run preview   # http://localhost:4173
+```
+
 Une fois installée, l'app se lance depuis le Dock et fonctionne hors ligne : le service
-worker sert l'app shell depuis le cache, sans serveur ni réseau.
+worker sert l'app shell depuis le cache, sans réseau.
 
 ### Ce qu'il faut savoir avant de s'y installer pour de bon
 
+- **Publier sur Pages rend l'app publique, pas les données.** N'importe qui peut ouvrir
+  l'URL, mais il n'y verra que son propre `localStorage`, vide. Rien n'est jamais envoyé
+  à un serveur.
 - **L'installation repose sur un cache, pas sur un binaire.** Vider les données de site du
   navigateur désinstalle l'app *et* efface les objectifs. Exporte régulièrement.
 - **Chaque navigateur a son propre stockage**, et l'app installée depuis Safari a même un
   conteneur distinct de l'onglet Safari. Les objectifs ne circulent pas entre eux : choisis
   un navigateur d'installation, ou migre via export/import JSON.
+- **Une app installée depuis `localhost` et une app installée depuis GitHub Pages sont deux
+  origines différentes**, donc deux stockages distincts. Même remarque : export/import.
 - **Pas de synchronisation entre appareils.** C'est le prix du « 100 % local ».
-- Pour réinstaller après un `npm run build`, relance `npm run preview` : le service worker
-  se met à jour tout seul au lancement suivant (`registerType: 'autoUpdate'`).
+- Après un nouveau déploiement, le service worker se met à jour tout seul au lancement
+  suivant (`registerType: 'autoUpdate'`).
 
 ## Structure
 

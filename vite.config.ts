@@ -3,7 +3,17 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
+/**
+ * Chemin de base du site.
+ *
+ * Vaut `/` en local, et `/Goal-Planner/` sur GitHub Pages, où le site est servi
+ * dans un sous-dossier portant le nom du dépôt. Sans cela, les assets sont
+ * cherchés à la racine du domaine et la page reste blanche.
+ */
+const base = process.env.VITE_BASE ?? '/';
+
 export default defineConfig({
+  base,
   plugins: [
     react(),
     tailwindcss(),
@@ -17,8 +27,8 @@ export default defineConfig({
         short_name: 'Goals',
         description: "Suivi local d'objectifs par domaine de vie.",
         lang: 'fr',
-        start_url: '/',
-        scope: '/',
+        start_url: base,
+        scope: base,
         display: 'standalone',
         background_color: '#020617',
         theme_color: '#020617',
